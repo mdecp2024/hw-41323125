@@ -1,7 +1,13 @@
-n = 5  # 總共的行數
-space = '_'
-for i in range(n):  # 對於每一行
-    # 印出空格
-    print(space * (n - i - 1), end='')  # 在每行前面印出空格
-    # 印出星號
-    print('*' * (2 * i + 1))  # 每行印出 2*i + 1 個星號
+# Given values
+v_i_kmh = 310  # Initial velocity in km/h
+d = 1000       # Distance in meters
+v_f = 0        # Final velocity (jet stops)
+
+# Convert initial velocity from km/h to m/s
+v_i = v_i_kmh * (5 / 18)
+
+# Using the equation: a = (v_f^2 - v_i^2) / (2 * d)
+a = (v_f**2 - v_i**2) / (2 * d)
+
+# Output the result
+print(f"Required constant acceleration: {a} m/s^2")
