@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li class='has-children'><a href='HW 1 Exam.html'>HW 1 Exam</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a></li></li></ul></ul><li class='has-children'><a href='HW 2.html'>HW 2</a><ul class='dropdown'><li><a href='w12_hw.html'>w12_hw</a><li><a href='HW 2 Exam.html'>HW 2 Exam</a></li></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
+                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li class='has-children'><a href='HW 1 Exam.html'>HW 1 Exam</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a></li></ul><li><a href='w12_hw.html'>w12_hw</a><li><a href='HW 2 Exam.html'>HW 2 Exam</a></li></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -141,8 +141,31 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">W10 << <a href='W10.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2<br /><h1>w11_hw</h1>
-<br />W10 << <a href='W10.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+    <div id="tipue_search_content">W10 << <a href='W10.html'>Previous</a> <a href='w12_hw.html'>Next</a> >> w12_hw<br /><h1>w11_hw</h1>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import math
+
+def draw_solid_circle():
+    size = 10  # 區域的大小為 10x10
+    radius = size // 2  # 圓的半徑
+    center = (radius, radius)  # 圓的中心位置 (5, 5)
+
+    for y in range(size):
+        for x in range(size):
+            # 計算與圓心的距離
+            distance = math.sqrt((x - center[0])**2 + (y - center[1])**2)
+            # 若距離小於等於半徑，則列印 '*'
+            if distance &lt;= radius:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()  # 換行
+
+# 執行函數
+draw_solid_circle()
+</pre>
+<p></p>
+<p>影片連結:<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/0DsPceMhGtU" width="560"></iframe></p>
+<br />W10 << <a href='W10.html'>Previous</a> <a href='w12_hw.html'>Next</a> >> w12_hw</div>
         
     <!-- footer -->
       <div class="container">
