@@ -46,6 +46,28 @@
 <p>第三題影片連結:<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/l_BtxThqh-A" width="560"></iframe>W7</p>
 <p>影片連結:</p>
 <h3>w11_hw</h3>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import math
+
+def draw_solid_circle():
+    size = 10  # 區域的大小為 10x10
+    radius = size // 2  # 圓的半徑
+    center = (radius, radius)  # 圓的中心位置 (5, 5)
+
+    for y in range(size):
+        for x in range(size):
+            # 計算與圓心的距離
+            distance = math.sqrt((x - center[0])**2 + (y - center[1])**2)
+            # 若距離小於等於半徑，則列印 '*'
+            if distance &lt;= radius:
+                print("*", end="")
+            else:
+                print(" ", end="")
+        print()  # 換行
+
+# 執行函數
+draw_solid_circle()
+</pre>
+<p></p>
 <p>影片連結:<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/0DsPceMhGtU" width="560"></iframe></p>
 <h2>w12_hw</h2>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">n = 5  # 總共的行數

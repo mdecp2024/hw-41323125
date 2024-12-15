@@ -165,6 +165,57 @@ draw_solid_circle()
 </pre>
 <p></p>
 <p>影片連結:<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/0DsPceMhGtU" width="560"></iframe></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
+from browser import document as doc
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=400, height=400)
+brython_div = doc["brython_div1"]
+brython_div &lt;= canvas
+
+# 每一格的 pixel 數
+gs = 20
+
+# Canvas 上下文
+ctx = canvas.getContext("2d")
+
+def dRect(lux, luy, w, h, s=1, c='#ff0000'):
+    ctx.lineWidth = s
+    ctx.strokeStyle = c
+    ctx.beginPath()
+    ctx.rect(lux, luy, w, h)
+    ctx.stroke()
+
+def grid(width, height, grid_pix):
+    # 繪製網格
+    for i in range(width):
+        for j in range(height):
+            dRect(i * grid_pix, j * grid_pix, grid_pix, grid_pix, 1, "lightgrey")
+
+def fill(x, y, color):
+    # 填充指定格子
+    ctx.fillStyle = color
+    ctx.fillRect(x * gs, y * gs, gs, gs)
+
+def draw_solid_circle(cx, cy, radius):
+    # cx, cy 是圓心座標（以格子為單位）
+    # radius 是圓的半徑（以格子為單位）
+    for i in range(10):  # x 軸格子
+        for j in range(10):  # y 軸格子
+            # 計算格子中心與圓心的距離
+            center_x = i + 0.5
+            center_y = j + 0.5
+            distance = ((center_x - cx)**2 + (center_y - cy)**2)**0.5
+            if distance &lt;= radius:  # 判斷是否在圓內
+                fill(i, j, "black")
+
+# 繪製網格
+grid(10, 10, gs)
+
+# 繪製實心圓形
+draw_solid_circle(5, 5, 3)  # 圓心在 (5, 5)，半徑為 3 格</pre>
+<p></p>
+<p>影片連結:<iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/kSWQfLlArKo" width="560"></iframe></p>
 <br />W10 << <a href='W10.html'>Previous</a> <a href='w12_hw.html'>Next</a> >> w12_hw</div>
         
     <!-- footer -->
