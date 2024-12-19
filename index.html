@@ -4,4 +4,26 @@
 </head>
 <body>
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>從 1 累加到 100</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.5/brython.min.js"></script>
+</head>
+<body onload="brython()">
+    <h1>點擊下方連結執行程式</h1>
+    <!-- 超連結，點擊後會執行累加程式 -->
+    <a href="#" onclick="run_addition()">從 1 累加到 100</a>
+
+    <script type="text/python">
+        # 定義一個函式來執行累加
+        def run_addition():
+            total = sum(range(1, 101))  # 計算從 1 到 100 的總和
+            print("從 1 累加到 100 的總和是:", total)  # 在控制台顯示結果
+            # 彈出一個提示框顯示結果
+            alert("從 1 累加到 100 的總和是: " + str(total))
+    </script>
+</body>
 </html>

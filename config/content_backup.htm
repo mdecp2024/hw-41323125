@@ -219,38 +219,14 @@ def draw_squares_and_diagonal(ctx):
 canvas, ctx = initialize_canvas()
 draw_squares_and_diagonal(ctx)
 </script>
-</p><h2>w13</h2>
-<div id="brython_div1"></div>
-<!-- 導入 brython 程式庫 -->
-<p>
-<script src="/static/brython.js"></script>
-<script src="/static/brython_stdlib.js"></script>
 </p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
-}
-</script>
-<script type="text/python3">
-from browser import html
-from browser import document as doc
- 
-# 利用 html 建立 canvas 超文件物件
-canvas = html.CANVAS(width=400, height=400)
-brython_div = doc["brython_div1"]
-brython_div <= canvas
-
-ctx = canvas.getContext("2d")
-ctx.lineWidth = 1
-ctx.strokeStyle = 'red'
-ctx.beginPath() 
-ctx.rect(0, 0, 200, 200)
-ctx.stroke()
-</script>
-</p>
-<p>from browser import document as doc, html def initialize_canvas(canvas_width=400, canvas_height=400, id="brython_div1"): # 創建一個 canvas 元素，並設置它的寬度和高度 canvas = html.CANVAS(width=canvas_width, height=canvas_height) # 獲取指定 id 的 DOM 元素，將 canvas 元素加到網頁中 brython_div = doc[id] brython_div &lt;= canvas # 將 canvas 加入網頁的 div 中 # 獲取 canvas 的 2D 上下文，用於繪圖操作 ctx = canvas.getContext("2d") return canvas, ctx # 返回畫布和上下文 def draw_squares_and_diagonal(ctx): # 定義正方形和對角線的參數 square_side = 200 # 正方形的邊長 radius = square_side / (2**0.5) # 外接圓的半徑 # 第一個紅色正方形 ctx.beginPath() ctx.rect(50, 50, square_side, square_side) ctx.strokeStyle = "red" ctx.lineWidth = 2 ctx.stroke() # 第一個正方形的外接圓 ctx.beginPath() ctx.arc(50 + square_side / 2, 50 + square_side / 2, radius, 0, 2 * 3.14159) ctx.strokeStyle = "green" ctx.lineWidth = 2 ctx.stroke() # 第二個紅色正方形（向右下平移） ctx.beginPath() ctx.rect(150, 150, square_side, square_side) ctx.strokeStyle = "red" ctx.lineWidth = 2 ctx.stroke() # 第二個正方形的外接圓 ctx.beginPath() ctx.arc(150 + square_side / 2, 150 + square_side / 2, radius, 0, 2 * 3.14159) ctx.strokeStyle = "green" ctx.lineWidth = 2 ctx.stroke() # 藍色對角線（從第一個正方形左上角到第二個正方形右下角） ctx.beginPath() ctx.moveTo(50, 50) ctx.lineTo(350, 350) ctx.strokeStyle = "blue" ctx.lineWidth = 2 ctx.stroke() # 初始化畫布並繪製圖形 canvas, ctx = initialize_canvas() draw_squares_and_diagonal(ctx)</p><h2>HW 2 Exam</h2>
+<h2>w15</h2>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">def run_addition():
+    total = sum(range(1, 101))
+    print("從 1 累加到 100 的總和是:", total)
+    alert("從 1 累加到 100 的總和是: " + str(total))
+</pre>
+<h2>HW 2 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 2 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
 <h1>HW 3</h1>
