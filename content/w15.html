@@ -157,6 +157,24 @@ def run_addition():
     total = addto(1, 100)
     print("從 1 累加到 100 的總和是:", total)
     alert("從 1 累加到 100 的總和是: " + str(total))</pre>
+<p><a href='/get_page/w15/def addto(start, end):     total = sum(range(start, end + 1))     return total  def add_only_even(start, end):     # 只累加偶數     total = sum(i for i in range(start, end + 1) if i % 2 == 0)     return total  def run_addition():     total = addto(1, 100)     print("從 1 累加到 100 的總和是:", total)     alert("從 1 累加到 100 的總和是: " + str(total))      even_total = add_only_even(1, 100)     print("從 1 累加到 100 只包含偶數的總和是:", even_total)     alert("從 1 累加到 100 只包含偶數的總和是: " + str(even_total))'>add_only_even</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def addto(start, end):
+    total = sum(range(start, end + 1))
+    return total
+
+def add_only_even(start, end):
+    # 只累加偶數
+    total = sum(i for i in range(start, end + 1) if i % 2 == 0)
+    return total
+
+def run_addition():
+    total = addto(1, 100)
+    print("從 1 累加到 100 的總和是:", total)
+    alert("從 1 累加到 100 的總和是: " + str(total))
+
+    even_total = add_only_even(1, 100)
+    print("從 1 累加到 100 只包含偶數的總和是:", even_total)
+    alert("從 1 累加到 100 只包含偶數的總和是: " + str(even_total))</pre>
 <p></p><br />w13_hw << <a href='w13_hw.html'>Previous</a> <a href='w14_ex.html'>Next</a> >> w14_ex</div>
         
     <!-- footer -->
