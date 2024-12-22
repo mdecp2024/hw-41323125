@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li class='has-children'><a href='HW 1 Exam.html'>HW 1 Exam</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a></li></ul><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
+                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -216,7 +216,138 @@ canvas, ctx = initialize_canvas()
 draw_squares_and_diagonal(ctx)
 </script>
 </p>
-<br />w12_hw << <a href='w12_hw.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="./../cmsimde/static/brython.js"></script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<div id="brython_div1"></div>
+<p>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+import math
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=600, height=600)  # 調整畫布大小以容納圓形
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+ctx = canvas.getContext("2d")
+
+grid_size_coarse = 10  # 粗略掃描的格點大小（10像素）
+grid_size_fine = 1     # 細掃描的格點大小（1像素）
+point_size = max(int(grid_size_fine / 2), 1)  # 點的大小
+ctx.lineWidth = 1
+
+# 設置畫布背景為白色
+ctx.fillStyle = 'white'
+ctx.fillRect(0, 0, 600, 600)  # 填充整個畫布為白色
+
+# 定義判定函式
+def point_in_circle1(x, y):
+    cx, cy, r = 200, 200, 141.4  # 第一個圓的圓心和半徑
+    return (x - cx)**2 + (y - cy)**2 < r**2
+
+def point_in_square1(x, y):
+    return 100 <= x <= 300 and 100 <= y <= 300
+
+def point_in_circle2(x, y):
+    cx, cy, r = 300, 300, 141.4  # 第二個圓的圓心和半徑
+    return (x - cx)**2 + (y - cy)**2 < r**2
+
+def point_in_square2(x, y):
+    return 200 <= x <= 400 and 200 <= y <= 400
+
+# 判定點是否在直線段上 (這裡的直線段為從 (100, 100) 到 (300, 300))
+def point_on_line_segment(x, y):
+    return 100 <= x <= 300 and 100 <= y <= 300 and y == x
+
+def point_above_line(x, y):
+    return y < x  # 因為直線的斜率是1，所以判定 y < x 即為上方
+
+def point_below_line(x, y):
+    return y > x  # 直線下方是 y > x
+
+# 根據區域顏色來判定顏色
+def get_region_color(x, y):
+    if point_in_circle1(x, y):
+        # 1. 位於第一個圓內部
+        if point_in_square1(x, y):
+            return 'rgba(0, 255, 0, 0.5)'  # 半透明綠色
+        elif x < 100:  # 圓內且在正方形1的左邊
+            return 'rgba(0, 0, 255, 0.5)'  # 半透明藍色
+        elif x > 300:  # 圓內且在正方形1的右邊
+            return 'rgba(255, 255, 0, 0.5)'  # 半透明黃色
+        elif y < 100:  # 圓內且在正方形1的上面
+            return 'rgba(128, 0, 128, 0.5)'  # 半透明紫色
+        elif y > 300:  # 圓內且在正方形1的下面
+            return 'rgba(255, 165, 0, 0.5)'  # 半透明橙色
+        else:
+            return 'rgba(255, 192, 203, 0.5)'  # 半透明粉紅色
+    elif point_in_circle2(x, y):
+        # 2. 位於第二個圓內部
+        if point_in_square2(x, y):
+            return 'rgba(255, 0, 0, 0.5)'  # 半透明紅色
+        elif x < 200:  # 圓內且在正方形2的左邊
+            return 'rgba(0, 255, 255, 0.5)'  # 半透明青色
+        elif x > 400:  # 圓內且在正方形2的右邊
+            return 'rgba(255, 0, 255, 0.5)'  # 半透明品紅色
+        elif y < 200:  # 圓內且在正方形2的上面
+            return 'rgba(139, 69, 19, 0.5)'  # 半透明棕色
+        elif y > 400:  # 圓內且在正方形2的下面
+            return 'rgba(0, 128, 128, 0.5)'  # 半透明深青色
+        else:
+            return 'rgba(238, 130, 238, 0.5)'  # 半透明紫羅蘭色
+    elif point_on_line_segment(x, y):
+        # 3. 位於對角線上
+        return 'rgba(0, 0, 0, 0.5)'  # 半透明黑色
+    elif point_above_line(x, y):
+        # 4. 位於對角線上方
+        return 'rgba(173, 216, 230, 0.5)'  # 半透明淡藍色
+    elif point_below_line(x, y):
+        # 5. 位於對角線下方
+        return 'rgba(144, 238, 144, 0.5)'  # 半透明淺綠色
+    else:
+        return None  # 兩個圓之外的區域不進行著色
+
+# 扫描每 10 像素的格點並上色（粗略掃描）
+def scan_and_draw_coarse():
+    for x in range(0, 600, grid_size_coarse):  # 遍歷畫布範圍，從左到右
+        for y in range(0, 600, grid_size_coarse):  # 從上到下
+            color = get_region_color(x, y)  # 獲取當前點的區域顏色
+            if color:  # 只有當顏色不為 None（即點在圓內）時才繪製
+                # 繪製點
+                ctx.fillStyle = color
+                ctx.beginPath()
+                ctx.arc(x, y, point_size, 0, 2 * math.pi)  # 點的半徑設為 5
+                ctx.fill()
+
+# 扫描每 1 像素的格點並上色（細掃描）
+def scan_and_draw_fine():
+    for x in range(0, 600, grid_size_fine):  # 遍歷畫布範圍，從左到右
+        for y in range(0, 600, grid_size_fine):  # 從上到下
+            color = get_region_color(x, y)  # 獲取當前點的區域顏色
+            if color:  # 只有當顏色不為 None（即點在圓內）時才繪製
+                # 繪製點
+                ctx.fillStyle = color
+                ctx.beginPath()
+                ctx.arc(x, y, point_size, 0, 2 * math.pi)  # 點的半徑設為 5
+                ctx.fill()
+
+# 先進行粗略掃描，再進行細掃描
+scan_and_draw_coarse()
+scan_and_draw_fine()
+</script>
+</p><br />w12_hw << <a href='w12_hw.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
         
     <!-- footer -->
       <div class="container">
