@@ -378,6 +378,33 @@ def run_addition():
     even_total = add_only_even(1, 100)
     print("從 1 累加到 100 只包含偶數的總和是:", even_total)
     alert("從 1 累加到 100 只包含偶數的總和是: " + str(even_total))</pre>
+<p><a href="/get_page/w15/def addto(start, end):     total = sum(range(start, end + 1))     return total  def add_only_even(start, end):     # 只累加偶數     total = sum(i for i in range(start, end + 1) if i % 2 == 0)     return total  def add_avoid_8(start, end):     # 只累加不包含 &quot;8&quot; 的整數     total = sum(i for i in range(start, end + 1) if '8' not in str(i))     return total  def run_addition():     total = addto(1, 100)     print(&quot;從 1 累加到 100 的總和是:&quot;, total)     alert(&quot;從 1 累加到 100 的總和是: &quot; + str(total))      even_total = add_only_even(1, 100)     print(&quot;從 1 累加到 100 只包含偶數的總和是:&quot;, even_total)     alert(&quot;從 1 累加到 100 只包含偶數的總和是: &quot; + str(even_total))      avoid_8_total = add_avoid_8(1, 100)     print(&quot;從 1 累加到 100 避開包含數字 8 的總和是:&quot;, avoid_8_total)     alert(&quot;從 1 累加到 100 避開包含數字 8 的總和是: &quot; + str(avoid_8_total))">add_avoid_8</a></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def addto(start, end):
+    total = sum(range(start, end + 1))
+    return total
+
+def add_only_even(start, end):
+    # 只累加偶數
+    total = sum(i for i in range(start, end + 1) if i % 2 == 0)
+    return total
+
+def add_avoid_8(start, end):
+    # 只累加不包含 "8" 的整數
+    total = sum(i for i in range(start, end + 1) if '8' not in str(i))
+    return total
+
+def run_addition():
+    total = addto(1, 100)
+    print("從 1 累加到 100 的總和是:", total)
+    alert("從 1 累加到 100 的總和是: " + str(total))
+
+    even_total = add_only_even(1, 100)
+    print("從 1 累加到 100 只包含偶數的總和是:", even_total)
+    alert("從 1 累加到 100 只包含偶數的總和是: " + str(even_total))
+
+    avoid_8_total = add_avoid_8(1, 100)
+    print("從 1 累加到 100 避開包含數字 8 的總和是:", avoid_8_total)
+    alert("從 1 累加到 100 避開包含數字 8 的總和是: " + str(avoid_8_total))</pre>
 <p></p><h2>w14_ex</h2>
 <!-- 導入 brython 程式庫 -->
 <p>
