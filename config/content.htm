@@ -132,8 +132,8 @@ for i in range(n):  # 對於每一行
 <p></p>
 <p></p>
 <h2>w12_hw</h2>
-<p>第一題:詢問(你叫什麼名字？/你來自哪裡？)並且回應(你好/真棒)，畫出一隻貓。 </p>
-<p>   </p>
+<p>第一題:<span>string_input_print</span></p>
+<p>          詢問(你叫什麼名字？/你來自哪裡？)並且回應(你好/真棒)，畫出一隻貓。 </p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 询问用户的名字
 name = input("你叫什麼名字？ ")
 
@@ -152,6 +152,20 @@ cat_art = r"""
 """
 
 print(cat_art)</pre>
+<p></p>
+<p>第二題:<span>variables</span></p>
+<p><span>          詢問(你叫什麼名字？/你最喜歡的食物是什麼？)</span><span>之後使用字串連接列印回答：("嗨！我的名字是 " + name)/("我最喜歡的食物是 " + favorite_food)/(name + "的最喜歡的食物是 " + favorite_food)</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 询问用户的名字
+name = input("你叫什麼名字？ ")
+
+# 询问用户最喜欢的食物
+favorite_food = input("你最喜歡的食物是什麼？ ")
+
+# 使用字符串连接输出回答
+print("嗨！我的名字是 " + name)
+print("我最喜歡的食物是 " + favorite_food)
+print(name + " 的最喜歡的食物是 " + favorite_food)
+</pre>
 <p></p><h2>w13_hw</h2>
 <!-- 導入 brython 程式庫 -->
 <p>
