@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
+                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12.html'>w12</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a></li></ul><li class='has-children'><a href='HW 4.html'>HW 4</a><ul class='dropdown'><li><a href='HW 4 Exam.html'>HW 4 Exam</a></li></ul><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -141,26 +141,28 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w11_hw << <a href='w11_hw.html'>Previous</a> <a href='w13_hw.html'>Next</a> >> w13_hw<br /><h1>w12_hw</h1>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">n = 5  # 總共的行數
-space = '_'
-'''
-for i in range(n):  # 對於每一行
-    # 印出空格
-    print(space * (n - i - 1), end='') 
-'''
+    <div id="tipue_search_content">w12 << <a href='w12.html'>Previous</a> <a href='w13_hw.html'>Next</a> >> w13_hw<br /><h1>w12_hw</h1>
+<p>第一題:詢問(你叫什麼名字？/你來自哪裡？)並且回應(你好/真棒)，畫出一隻貓。 </p>
+<p>   </p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 询问用户的名字
+name = input("你叫什麼名字？ ")
+
+# 询问用户的所在地
+location = input("你來自哪裡？ ")
+
+# 打印回应
+print(f"\n你好, {name}！")
+print(f"真棒！你來自 {location}！")
+
+# 打印一只简单的 ASCII 猫
+cat_art = r"""
+ /\_/\  
+( o.o ) 
+ &gt; ^ &lt;
 """
-for i in range(n):  # 對於每一行
-    # 印出空格
-    print(space * (n - i - 1), end='') 
-"""
-for i in range(n):  # 對於每一行
-    # 印出空格
-    #print(space * (n - i - 1), end='') 
-    print("目前數字"+ str(i))  # 每行印出 2*i + 1 個星號</pre>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/8eqGasqKWyE" width="560"></iframe></p>
-<p></p>
-<p></p><br />w11_hw << <a href='w11_hw.html'>Previous</a> <a href='w13_hw.html'>Next</a> >> w13_hw</div>
+
+print(cat_art)</pre>
+<p></p><br />w12 << <a href='w12.html'>Previous</a> <a href='w13_hw.html'>Next</a> >> w13_hw</div>
         
     <!-- footer -->
       <div class="container">
