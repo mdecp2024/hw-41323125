@@ -2,7 +2,7 @@
         <head>
         <title>cp_hw</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -141,81 +141,172 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">w12_hw << <a href='w12_hw.html'>Previous</a> <a href='w15.html'>Next</a> >> w15<br /><h1>w13_hw</h1>
-<!-- 導入 brython 程式庫 -->
-<p>
-<script src="./../cmsimde/static/brython.js"></script>
-<script src="./../cmsimde/static/brython_stdlib.js"></script>
-</p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
-}
-</script>
-</p>
-<div id="brython_div1"></div>
-<p>
-<script type="text/python3">
-from browser import document as doc, html
+    <div id="tipue_search_content">HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4<br /><h1>w16_exam1</h1>
+<p><img alt="" src="https://youtu.be/8wfMsMqC1tA"/>影片:<a href="https://youtu.be/8wfMsMqC1tA">https://youtu.be/8wfMsMqC1tA</a><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/></p>
+<p></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
+from browser import document as doc
+import math
 
-def initialize_canvas(canvas_width=400, canvas_height=400, id="brython_div1"):
-    # 創建一個 canvas 元素，並設置它的寬度和高度
-    canvas = html.CANVAS(width=canvas_width, height=canvas_height)
-    # 獲取指定 id 的 DOM 元素，將 canvas 元素加到網頁中
-    brython_div = doc[id]
-    brython_div <= canvas  # 將 canvas 加入網頁的 div 中
-    # 獲取 canvas 的 2D 上下文，用於繪圖操作
+# 初始化畫布
+def initialize_canvas():
+    canvas = html.CANVAS(width=600, height=600)
+    brython_div = doc["brython_div1"]
+    brython_div &lt;= canvas
     ctx = canvas.getContext("2d")
-    return canvas, ctx  # 返回畫布和上下文
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, 600, 600)  # 填充整個畫布為白色
+    return canvas, ctx
 
-def draw_squares_and_diagonal(ctx):
-    # 定義正方形和對角線的參數
-    square_side = 200  # 正方形的邊長
-    radius = square_side / (2**0.5)  # 外接圓的半徑
-
-    # 第一個紅色正方形
+# 繪製六邊形
+def draw_hexagon(ctx, x, y, size, color):
+    """繪製六邊形"""
     ctx.beginPath()
-    ctx.rect(50, 50, square_side, square_side)
-    ctx.strokeStyle = "red"
-    ctx.lineWidth = 2
+    for i in range(6):
+        angle = math.pi / 3 * i
+        x_pos = x + size * math.cos(angle)
+        y_pos = y + size * math.sin(angle)
+        if i == 0:
+            ctx.moveTo(x_pos, y_pos)
+        else:
+            ctx.lineTo(x_pos, y_pos)
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製菱形
+def draw_diamond(ctx, x, y, width, height, color):
+    """繪製菱形"""
+    ctx.beginPath()
+    ctx.moveTo(x, y - height / 2)
+    ctx.lineTo(x + width / 2, y)
+    ctx.lineTo(x, y + height / 2)
+    ctx.lineTo(x - width / 2, y)
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製等腰三角形
+def draw_isosceles_triangle(ctx, x, y, base, height, color):
+    """繪製等腰三角形"""
+    half_base = base / 2
+    # 三角形的三個頂點
+    ctx.beginPath()
+    ctx.moveTo(x - half_base, y)  # 左下角
+    ctx.lineTo(x + half_base, y)  # 右下角
+    ctx.lineTo(x, y - height)     # 上頂點
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製圓形
+def draw_circle(ctx, x, y, radius, color):
+    """繪製圓形"""
+    ctx.beginPath()
+    ctx.arc(x, y, radius, 0, 2 * math.pi)
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製矩形
+def draw_rectangle(ctx, x, y, width, height, color):
+    """繪製矩形"""
+    ctx.beginPath()
+    ctx.rect(x, y, width, height)
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 標註原點
+def mark_origin(ctx, x, y):
+    """標註原點 (31, 25)"""
+    ctx.fillStyle = "black"
+    ctx.font = "16px Arial"
+    ctx.fillText(f"({x}, {y})", x + 10, y - 10)
+
+# 繪製坐標軸 (從原點 (31, 25) 開始)
+def draw_axes(ctx, origin_x, origin_y):
+    """繪製 X 軸和 Y 軸，並標示正方向"""
+    # X 軸 (向右為正)
+    ctx.beginPath()
+    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
+    ctx.lineTo(600, origin_y)  # 直到畫布的右側 (X=600)，Y 不變
+    ctx.lineWidth = 2  # 設定線條寬度
+    ctx.strokeStyle = "black"
     ctx.stroke()
 
-    # 第一個正方形的外接圓
+    # Y 軸 (向下為正)
     ctx.beginPath()
-    ctx.arc(50 + square_side / 2, 50 + square_side / 2, radius, 0, 2 * 3.14159)
-    ctx.strokeStyle = "green"
-    ctx.lineWidth = 2
+    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
+    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
     ctx.stroke()
 
-    # 第二個紅色正方形（向右下平移）
+    # 標註 X 軸的箭頭 (向右為正)
     ctx.beginPath()
-    ctx.rect(150, 150, square_side, square_side)
-    ctx.strokeStyle = "red"
-    ctx.lineWidth = 2
+    ctx.moveTo(590, origin_y - 10)  # X 軸末端的箭頭起點
+    ctx.lineTo(600, origin_y)
+    ctx.lineTo(590, origin_y + 10)
     ctx.stroke()
 
-    # 第二個正方形的外接圓
+    # 標註 Y 軸的箭頭 (向下為正)
     ctx.beginPath()
-    ctx.arc(150 + square_side / 2, 150 + square_side / 2, radius, 0, 2 * 3.14159)
-    ctx.strokeStyle = "green"
-    ctx.lineWidth = 2
+    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 600)
+    ctx.lineTo(origin_x + 10, 590)
     ctx.stroke()
 
-    # 藍色對角線（從第一個正方形左上角到第二個正方形右下角）
-    ctx.beginPath()
-    ctx.moveTo(50, 50)
-    ctx.lineTo(350, 350)
-    ctx.strokeStyle = "blue"
-    ctx.lineWidth = 2
-    ctx.stroke()
+    # 標註 X 軸的文字
+    ctx.fillStyle = "black"
+    ctx.font = "16px Arial"
+    ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
 
-# 初始化畫布並繪製圖形
-canvas, ctx = initialize_canvas()
-draw_squares_and_diagonal(ctx)
-</script>
-</p>
+    # 標註 Y 軸的文字，移動到箭頭右側
+    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+
+# 繪製場景
+def draw_scene():
+    """繪製場景"""
+    canvas, ctx = initialize_canvas()
+
+    origin_x, origin_y = 31, 25  # 原點坐標 (31, 25)
+
+    # 標註原點 (31, 25)
+    mark_origin(ctx, origin_x, origin_y)
+
+    # 繪製坐標軸 (從原點 (31, 25) 開始)
+    draw_axes(ctx, origin_x, origin_y)
+
+    # 六邊形的大小
+    hexagon_size = 50
+
+    # 計算六邊形的中心點 X 座標，使最左側頂點對齊於 X = 31
+    hexagon_x = 31 + hexagon_size  # 六邊形的中心 X 座標
+
+    # 繪製六邊形
+    draw_hexagon(ctx, hexagon_x, 180, hexagon_size, "orange")
+
+    # 繪製菱形，調整位置
+    diamond_x = 180
+    draw_diamond(ctx, diamond_x, 180, 80, 120, "teal")
+
+    # 繪製縮小的等腰三角形，放置於菱形底部對齊但不重疊，調整位置
+    base = 60  # 三角形底邊長度
+    height = 50  # 根據底邊長度調整高度
+    triangle_x = diamond_x + 60 / 2 + 10
+    draw_isosceles_triangle(ctx, triangle_x, 180 + 60, base, height, "lightpink")
+
+    # 繪製圓形，調整位置
+    circle_x = 280
+    draw_circle(ctx, circle_x, 180, 50, "magenta")
+
+    # 繪製正方形，調整位置
+    square_x = 340
+    draw_rectangle(ctx, square_x, 140, 80, 80, "yellow")
+
+    # 繪製矩形，調整位置
+    rectangle_x = 440
+    draw_rectangle(ctx, rectangle_x, 160, 100, 40, "blue")
+
+# 開始繪製
+draw_scene()</pre>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="./../cmsimde/static/brython.js"></script>
@@ -224,11 +315,12 @@ draw_squares_and_diagonal(ctx)
 <!-- 啟動 Brython -->
 <p>
 <script>
-window.onload=function(){
-brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+window.onload = function() { 
+    brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']}); 
 }
 </script>
 </p>
+<!-- 定義顯示 canvas 的 div 元素 -->
 <div id="brython_div1"></div>
 <p>
 <script type="text/python3">
@@ -236,119 +328,167 @@ from browser import html
 from browser import document as doc
 import math
 
-# 利用 html 建立 canvas 超文件物件
-canvas = html.CANVAS(width=600, height=600)  # 調整畫布大小以容納圓形
-brython_div = doc["brython_div1"]
-brython_div <= canvas
+# 初始化畫布
+def initialize_canvas():
+    canvas = html.CANVAS(width=600, height=600)
+    brython_div = doc["brython_div1"]
+    brython_div <= canvas
+    ctx = canvas.getContext("2d")
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, 600, 600)  # 填充整個畫布為白色
+    return canvas, ctx
 
-ctx = canvas.getContext("2d")
-
-grid_size_coarse = 10  # 粗略掃描的格點大小（10像素）
-grid_size_fine = 1     # 細掃描的格點大小（1像素）
-point_size = max(int(grid_size_fine / 2), 1)  # 點的大小
-ctx.lineWidth = 1
-
-# 設置畫布背景為白色
-ctx.fillStyle = 'white'
-ctx.fillRect(0, 0, 600, 600)  # 填充整個畫布為白色
-
-# 定義判定函式
-def point_in_circle1(x, y):
-    cx, cy, r = 200, 200, 141.4  # 第一個圓的圓心和半徑
-    return (x - cx)**2 + (y - cy)**2 < r**2
-
-def point_in_square1(x, y):
-    return 100 <= x <= 300 and 100 <= y <= 300
-
-def point_in_circle2(x, y):
-    cx, cy, r = 300, 300, 141.4  # 第二個圓的圓心和半徑
-    return (x - cx)**2 + (y - cy)**2 < r**2
-
-def point_in_square2(x, y):
-    return 200 <= x <= 400 and 200 <= y <= 400
-
-# 判定點是否在直線段上 (這裡的直線段為從 (100, 100) 到 (300, 300))
-def point_on_line_segment(x, y):
-    return 100 <= x <= 300 and 100 <= y <= 300 and y == x
-
-def point_above_line(x, y):
-    return y < x  # 因為直線的斜率是1，所以判定 y < x 即為上方
-
-def point_below_line(x, y):
-    return y > x  # 直線下方是 y > x
-
-# 根據區域顏色來判定顏色
-def get_region_color(x, y):
-    if point_in_circle1(x, y):
-        # 1. 位於第一個圓內部
-        if point_in_square1(x, y):
-            return 'rgba(0, 255, 0, 0.5)'  # 半透明綠色
-        elif x < 100:  # 圓內且在正方形1的左邊
-            return 'rgba(0, 0, 255, 0.5)'  # 半透明藍色
-        elif x > 300:  # 圓內且在正方形1的右邊
-            return 'rgba(255, 255, 0, 0.5)'  # 半透明黃色
-        elif y < 100:  # 圓內且在正方形1的上面
-            return 'rgba(128, 0, 128, 0.5)'  # 半透明紫色
-        elif y > 300:  # 圓內且在正方形1的下面
-            return 'rgba(255, 165, 0, 0.5)'  # 半透明橙色
+# 繪製六邊形
+def draw_hexagon(ctx, x, y, size, color):
+    """繪製六邊形"""
+    ctx.beginPath()
+    for i in range(6):
+        angle = math.pi / 3 * i
+        x_pos = x + size * math.cos(angle)
+        y_pos = y + size * math.sin(angle)
+        if i == 0:
+            ctx.moveTo(x_pos, y_pos)
         else:
-            return 'rgba(255, 192, 203, 0.5)'  # 半透明粉紅色
-    elif point_in_circle2(x, y):
-        # 2. 位於第二個圓內部
-        if point_in_square2(x, y):
-            return 'rgba(255, 0, 0, 0.5)'  # 半透明紅色
-        elif x < 200:  # 圓內且在正方形2的左邊
-            return 'rgba(0, 255, 255, 0.5)'  # 半透明青色
-        elif x > 400:  # 圓內且在正方形2的右邊
-            return 'rgba(255, 0, 255, 0.5)'  # 半透明品紅色
-        elif y < 200:  # 圓內且在正方形2的上面
-            return 'rgba(139, 69, 19, 0.5)'  # 半透明棕色
-        elif y > 400:  # 圓內且在正方形2的下面
-            return 'rgba(0, 128, 128, 0.5)'  # 半透明深青色
-        else:
-            return 'rgba(238, 130, 238, 0.5)'  # 半透明紫羅蘭色
-    elif point_on_line_segment(x, y):
-        # 3. 位於對角線上
-        return 'rgba(0, 0, 0, 0.5)'  # 半透明黑色
-    elif point_above_line(x, y):
-        # 4. 位於對角線上方
-        return 'rgba(173, 216, 230, 0.5)'  # 半透明淡藍色
-    elif point_below_line(x, y):
-        # 5. 位於對角線下方
-        return 'rgba(144, 238, 144, 0.5)'  # 半透明淺綠色
-    else:
-        return None  # 兩個圓之外的區域不進行著色
+            ctx.lineTo(x_pos, y_pos)
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
 
-# 扫描每 10 像素的格點並上色（粗略掃描）
-def scan_and_draw_coarse():
-    for x in range(0, 600, grid_size_coarse):  # 遍歷畫布範圍，從左到右
-        for y in range(0, 600, grid_size_coarse):  # 從上到下
-            color = get_region_color(x, y)  # 獲取當前點的區域顏色
-            if color:  # 只有當顏色不為 None（即點在圓內）時才繪製
-                # 繪製點
-                ctx.fillStyle = color
-                ctx.beginPath()
-                ctx.arc(x, y, point_size, 0, 2 * math.pi)  # 點的半徑設為 5
-                ctx.fill()
+# 繪製菱形
+def draw_diamond(ctx, x, y, width, height, color):
+    """繪製菱形"""
+    ctx.beginPath()
+    ctx.moveTo(x, y - height / 2)
+    ctx.lineTo(x + width / 2, y)
+    ctx.lineTo(x, y + height / 2)
+    ctx.lineTo(x - width / 2, y)
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
 
-# 扫描每 1 像素的格點並上色（細掃描）
-def scan_and_draw_fine():
-    for x in range(0, 600, grid_size_fine):  # 遍歷畫布範圍，從左到右
-        for y in range(0, 600, grid_size_fine):  # 從上到下
-            color = get_region_color(x, y)  # 獲取當前點的區域顏色
-            if color:  # 只有當顏色不為 None（即點在圓內）時才繪製
-                # 繪製點
-                ctx.fillStyle = color
-                ctx.beginPath()
-                ctx.arc(x, y, point_size, 0, 2 * math.pi)  # 點的半徑設為 5
-                ctx.fill()
+# 繪製等腰三角形
+def draw_isosceles_triangle(ctx, x, y, base, height, color):
+    """繪製等腰三角形"""
+    half_base = base / 2
+    # 三角形的三個頂點
+    ctx.beginPath()
+    ctx.moveTo(x - half_base, y)  # 左下角
+    ctx.lineTo(x + half_base, y)  # 右下角
+    ctx.lineTo(x, y - height)     # 上頂點
+    ctx.closePath()
+    ctx.fillStyle = color
+    ctx.fill()
 
-# 先進行粗略掃描，再進行細掃描
-scan_and_draw_coarse()
-scan_and_draw_fine()
+# 繪製圓形
+def draw_circle(ctx, x, y, radius, color):
+    """繪製圓形"""
+    ctx.beginPath()
+    ctx.arc(x, y, radius, 0, 2 * math.pi)
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 繪製矩形
+def draw_rectangle(ctx, x, y, width, height, color):
+    """繪製矩形"""
+    ctx.beginPath()
+    ctx.rect(x, y, width, height)
+    ctx.fillStyle = color
+    ctx.fill()
+
+# 標註原點
+def mark_origin(ctx, x, y):
+    """標註原點 (31, 25)"""
+    ctx.fillStyle = "black"
+    ctx.font = "16px Arial"
+    ctx.fillText(f"({x}, {y})", x + 10, y - 10)
+
+# 繪製坐標軸 (從原點 (31, 25) 開始)
+def draw_axes(ctx, origin_x, origin_y):
+    """繪製 X 軸和 Y 軸，並標示正方向"""
+    # X 軸 (向右為正)
+    ctx.beginPath()
+    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
+    ctx.lineTo(600, origin_y)  # 直到畫布的右側 (X=600)，Y 不變
+    ctx.lineWidth = 2  # 設定線條寬度
+    ctx.strokeStyle = "black"
+    ctx.stroke()
+
+    # Y 軸 (向下為正)
+    ctx.beginPath()
+    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
+    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
+    ctx.stroke()
+
+    # 標註 X 軸的箭頭 (向右為正)
+    ctx.beginPath()
+    ctx.moveTo(590, origin_y - 10)  # X 軸末端的箭頭起點
+    ctx.lineTo(600, origin_y)
+    ctx.lineTo(590, origin_y + 10)
+    ctx.stroke()
+
+    # 標註 Y 軸的箭頭 (向下為正)
+    ctx.beginPath()
+    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 600)
+    ctx.lineTo(origin_x + 10, 590)
+    ctx.stroke()
+
+    # 標註 X 軸的文字
+    ctx.fillStyle = "black"
+    ctx.font = "16px Arial"
+    ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
+
+    # 標註 Y 軸的文字，移動到箭頭右側
+    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+
+# 繪製場景
+def draw_scene():
+    """繪製場景"""
+    canvas, ctx = initialize_canvas()
+
+    origin_x, origin_y = 31, 25  # 原點坐標 (31, 25)
+
+    # 標註原點 (31, 25)
+    mark_origin(ctx, origin_x, origin_y)
+
+    # 繪製坐標軸 (從原點 (31, 25) 開始)
+    draw_axes(ctx, origin_x, origin_y)
+
+    # 六邊形的大小
+    hexagon_size = 50
+
+    # 計算六邊形的中心點 X 座標，使最左側頂點對齊於 X = 31
+    hexagon_x = 31 + hexagon_size  # 六邊形的中心 X 座標
+
+    # 繪製六邊形
+    draw_hexagon(ctx, hexagon_x, 180, hexagon_size, "orange")
+
+    # 繪製菱形，調整位置
+    diamond_x = 180
+    draw_diamond(ctx, diamond_x, 180, 80, 120, "teal")
+
+    # 繪製縮小的等腰三角形，放置於菱形底部對齊但不重疊，調整位置
+    base = 60  # 三角形底邊長度
+    height = 50  # 根據底邊長度調整高度
+    triangle_x = diamond_x + 60 / 2 + 10
+    draw_isosceles_triangle(ctx, triangle_x, 180 + 60, base, height, "lightpink")
+
+    # 繪製圓形，調整位置
+    circle_x = 280
+    draw_circle(ctx, circle_x, 180, 50, "magenta")
+
+    # 繪製正方形，調整位置
+    square_x = 340
+    draw_rectangle(ctx, square_x, 140, 80, 80, "yellow")
+
+    # 繪製矩形，調整位置
+    rectangle_x = 440
+    draw_rectangle(ctx, rectangle_x, 160, 100, 40, "blue")
+
+# 開始繪製
+draw_scene()
 </script>
-</p>
-<br />w12_hw << <a href='w12_hw.html'>Previous</a> <a href='w15.html'>Next</a> >> w15</div>
+</p><br />HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4</div>
         
     <!-- footer -->
       <div class="container">
