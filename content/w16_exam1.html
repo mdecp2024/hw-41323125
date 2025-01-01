@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='First.html'>First</a><li><a href='about.html'>about</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12.html'>w12</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a></li></ul><li class='has-children'><a href='HW 2.html'>HW 2</a><ul class='dropdown'><li class='has-children'><a href='HW 2 Exam.html'>HW 2 Exam</a><ul class='dropdown'><li><a href='w16_exam1.html'>w16_exam1</a></li></li></ul></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li><a href='HW 3 Exam.html'>HW 3 Exam</a></li></ul><li><a href='HW 4.html'>HW 4</a><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
+                     <li><a href='First.html'>First</a><li><a href='Attendance.html'>Attendance</a><li class='has-children'><a href='HW 1.html'>HW 1</a><ul class='dropdown'><li><a href='W10.html'>W10</a><li><a href='w11_hw.html'>w11_hw</a><li><a href='w12.html'>w12</a><li><a href='w12_hw.html'>w12_hw</a><li><a href='w13_hw.html'>w13_hw</a><li><a href='w15.html'>w15</a><li><a href='w14_ex.html'>w14_ex</a></li></ul><li class='has-children'><a href='HW 2.html'>HW 2</a><ul class='dropdown'><li class='has-children'><a href='HW 2 Exam.html'>HW 2 Exam</a><ul class='dropdown'><li><a href='w16_exam1.html'>w16_exam1</a></li></li></ul></ul><li class='has-children'><a href='HW 3.html'>HW 3</a><ul class='dropdown'><li class='has-children'><a href='HW 3 Exam.html'>HW 3 Exam</a><ul class='dropdown'><li><a href='w16_exam2.html'>w16_exam2</a></li></li></ul></ul><li><a href='HW 4.html'>HW 4</a><li><a href='Final Report.html'>Final Report</a><li><a href='Brython.html'>Brython</a></li>
                       </ul>
                 </nav>
               </div>
@@ -143,7 +143,6 @@ img.add_border {
         </header>
     <div id="tipue_search_content">HW 2 Exam << <a href='HW 2 Exam.html'>Previous</a> <a href='HW 3.html'>Next</a> >> HW 3<br /><h1>w16_exam1</h1>
 <p><img alt="" src="https://youtu.be/8wfMsMqC1tA"/>影片:<a href="https://youtu.be/8wfMsMqC1tA">https://youtu.be/8wfMsMqC1tA</a><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/></p>
-<p></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
 import math
@@ -236,7 +235,7 @@ def draw_axes(ctx, origin_x, origin_y):
     # Y 軸 (向下為正)
     ctx.beginPath()
     ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
+    ctx.lineTo(origin_x, 300)  # 直到畫布的下側 (Y=600)，X 不變
     ctx.stroke()
 
     # 標註 X 軸的箭頭 (向右為正)
@@ -248,9 +247,9 @@ def draw_axes(ctx, origin_x, origin_y):
 
     # 標註 Y 軸的箭頭 (向下為正)
     ctx.beginPath()
-    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
-    ctx.lineTo(origin_x, 600)
-    ctx.lineTo(origin_x + 10, 590)
+    ctx.moveTo(origin_x - 10, 290)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 300)
+    ctx.lineTo(origin_x + 10, 290)
     ctx.stroke()
 
     # 標註 X 軸的文字
@@ -259,7 +258,7 @@ def draw_axes(ctx, origin_x, origin_y):
     ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
 
     # 標註 Y 軸的文字，移動到箭頭右側
-    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+    ctx.fillText("Y", origin_x + 15, 300 - 30)  # 移動 Y 標註位置
 
 # 繪製場景
 def draw_scene():
@@ -307,6 +306,7 @@ def draw_scene():
 
 # 開始繪製
 draw_scene()</pre>
+<p><br/><br/></p>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="./../cmsimde/static/brython.js"></script>
@@ -416,7 +416,7 @@ def draw_axes(ctx, origin_x, origin_y):
     # Y 軸 (向下為正)
     ctx.beginPath()
     ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
+    ctx.lineTo(origin_x, 300)  # 直到畫布的下側 (Y=600)，X 不變
     ctx.stroke()
 
     # 標註 X 軸的箭頭 (向右為正)
@@ -428,9 +428,9 @@ def draw_axes(ctx, origin_x, origin_y):
 
     # 標註 Y 軸的箭頭 (向下為正)
     ctx.beginPath()
-    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
-    ctx.lineTo(origin_x, 600)
-    ctx.lineTo(origin_x + 10, 590)
+    ctx.moveTo(origin_x - 10, 290)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 300)
+    ctx.lineTo(origin_x + 10, 290)
     ctx.stroke()
 
     # 標註 X 軸的文字
@@ -439,7 +439,7 @@ def draw_axes(ctx, origin_x, origin_y):
     ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
 
     # 標註 Y 軸的文字，移動到箭頭右側
-    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+    ctx.fillText("Y", origin_x + 15, 300 - 30)  # 移動 Y 標註位置
 
 # 繪製場景
 def draw_scene():

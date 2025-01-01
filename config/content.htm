@@ -7,12 +7,7 @@
 <p></p>
 <p>個人倉儲:<a href="https://github.com/mdecp2024/hw-41323125">https://github.com/mdecp2024/hw-41323125</a></p>
 <p>個人網站:<a class="Link--inTextBlock" href="https://mdecp2024.github.io/hw-41323125/">https://mdecp2024.github.io/hw-41323125/</a></p>
-<p>其他資訊:</p>
-<p style="padding-left: 30px;"><a href="/downloads/cd2023_pj3ag4_zmq_football_4.7.7z">cd2023_pj3ag4_zmq_football_4.7.7z</a></p>
-<p style="padding-left: 30px;"><a href="https://localhost:9446/downloads/cd2024_2b_g6_steel_ball_platform_nxopen_copsim.7z">cd2024_2b_g6_steel_ball_platform_nxopen_copsim.7z</a></p>
-<h1>about</h1>
-<p>個人倉儲:<a href="https://github.com/mdecp2024/hw-41323125">https://github.com/mdecp2024/hw-41323125</a></p>
-<p>個人網站:<a class="Link--inTextBlock" href="https://mdecp2024.github.io/hw-41323125/">https://mdecp2024.github.io/hw-41323125/</a></p>
+<p></p>
 <h1>Attendance</h1>
 <p>出席 (10%) - 自行舉證評分</p>
 <p>自行利用 Github commits 提交記錄評分.</p>
@@ -610,7 +605,6 @@ draw_circles(x1, y1, r1, x2, y2, r2, x3, y3, r3)
 <h2>HW 2 Exam</h2>
 <h3>w16_exam1</h3>
 <p><img alt="" src="https://youtu.be/8wfMsMqC1tA"/>影片:<a href="https://youtu.be/8wfMsMqC1tA">https://youtu.be/8wfMsMqC1tA</a><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/></p>
-<p></p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
 from browser import document as doc
 import math
@@ -703,7 +697,7 @@ def draw_axes(ctx, origin_x, origin_y):
     # Y 軸 (向下為正)
     ctx.beginPath()
     ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
+    ctx.lineTo(origin_x, 300)  # 直到畫布的下側 (Y=600)，X 不變
     ctx.stroke()
 
     # 標註 X 軸的箭頭 (向右為正)
@@ -715,9 +709,9 @@ def draw_axes(ctx, origin_x, origin_y):
 
     # 標註 Y 軸的箭頭 (向下為正)
     ctx.beginPath()
-    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
-    ctx.lineTo(origin_x, 600)
-    ctx.lineTo(origin_x + 10, 590)
+    ctx.moveTo(origin_x - 10, 290)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 300)
+    ctx.lineTo(origin_x + 10, 290)
     ctx.stroke()
 
     # 標註 X 軸的文字
@@ -726,7 +720,7 @@ def draw_axes(ctx, origin_x, origin_y):
     ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
 
     # 標註 Y 軸的文字，移動到箭頭右側
-    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+    ctx.fillText("Y", origin_x + 15, 300 - 30)  # 移動 Y 標註位置
 
 # 繪製場景
 def draw_scene():
@@ -774,6 +768,7 @@ def draw_scene():
 
 # 開始繪製
 draw_scene()</pre>
+<p><br/><br/></p>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="/static/brython.js"></script>
@@ -883,7 +878,7 @@ def draw_axes(ctx, origin_x, origin_y):
     # Y 軸 (向下為正)
     ctx.beginPath()
     ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(origin_x, 600)  # 直到畫布的下側 (Y=600)，X 不變
+    ctx.lineTo(origin_x, 300)  # 直到畫布的下側 (Y=600)，X 不變
     ctx.stroke()
 
     # 標註 X 軸的箭頭 (向右為正)
@@ -895,9 +890,9 @@ def draw_axes(ctx, origin_x, origin_y):
 
     # 標註 Y 軸的箭頭 (向下為正)
     ctx.beginPath()
-    ctx.moveTo(origin_x - 10, 590)  # Y 軸末端的箭頭起點
-    ctx.lineTo(origin_x, 600)
-    ctx.lineTo(origin_x + 10, 590)
+    ctx.moveTo(origin_x - 10, 290)  # Y 軸末端的箭頭起點
+    ctx.lineTo(origin_x, 300)
+    ctx.lineTo(origin_x + 10, 290)
     ctx.stroke()
 
     # 標註 X 軸的文字
@@ -906,7 +901,7 @@ def draw_axes(ctx, origin_x, origin_y):
     ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
 
     # 標註 Y 軸的文字，移動到箭頭右側
-    ctx.fillText("Y", origin_x + 15, 600 - 30)  # 移動 Y 標註位置
+    ctx.fillText("Y", origin_x + 15, 300 - 30)  # 移動 Y 標註位置
 
 # 繪製場景
 def draw_scene():
@@ -966,10 +961,10 @@ draw_scene()
 <p style="padding-left: 60px;"><a href="https://localhost:9446/downloads/cd2024_2b_g6_steel_ball_platform_nxopen_copsim.7z">cd2024_2b_g6_steel_ball_platform_nxopen_copsim.7z</a></p>
 <p>完成上述流程整理後, 請將 HW4 自評分數輸入 cp2024 自評表單中.</p>
 <h2>HW 3 Exam</h2>
-<p>每六人為一組進行協同程式練習</p>
-<p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 4 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
+<h3>w16_exam2</h3>
 <h1>HW 4</h1>
-<p></p><h1>Final Report</h1>
+<p></p>
+<h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
 <p style="padding-left: 30px;">......</p>
