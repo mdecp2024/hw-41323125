@@ -604,170 +604,8 @@ draw_circles(x1, y1, r1, x2, y2, r2, x3, y3, r3)
 <h1>HW 2</h1>
 <h2>HW 2 Exam</h2>
 <h3>w16_exam1</h3>
-<p><img alt="" src="https://youtu.be/8wfMsMqC1tA"/>影片:<a href="https://youtu.be/8wfMsMqC1tA">https://youtu.be/8wfMsMqC1tA</a><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/></p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html
-from browser import document as doc
-import math
-
-# 初始化畫布
-def initialize_canvas():
-    canvas = html.CANVAS(width=600, height=600)
-    brython_div = doc["brython_div1"]
-    brython_div &lt;= canvas
-    ctx = canvas.getContext("2d")
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, 600, 600)  # 填充整個畫布為白色
-    return canvas, ctx
-
-# 繪製六邊形
-def draw_hexagon(ctx, x, y, size, color):
-    """繪製六邊形"""
-    ctx.beginPath()
-    for i in range(6):
-        angle = math.pi / 3 * i
-        x_pos = x + size * math.cos(angle)
-        y_pos = y + size * math.sin(angle)
-        if i == 0:
-            ctx.moveTo(x_pos, y_pos)
-        else:
-            ctx.lineTo(x_pos, y_pos)
-    ctx.closePath()
-    ctx.fillStyle = color
-    ctx.fill()
-
-# 繪製菱形
-def draw_diamond(ctx, x, y, width, height, color):
-    """繪製菱形"""
-    ctx.beginPath()
-    ctx.moveTo(x, y - height / 2)
-    ctx.lineTo(x + width / 2, y)
-    ctx.lineTo(x, y + height / 2)
-    ctx.lineTo(x - width / 2, y)
-    ctx.closePath()
-    ctx.fillStyle = color
-    ctx.fill()
-
-# 繪製等腰三角形
-def draw_isosceles_triangle(ctx, x, y, base, height, color):
-    """繪製等腰三角形"""
-    half_base = base / 2
-    # 三角形的三個頂點
-    ctx.beginPath()
-    ctx.moveTo(x - half_base, y)  # 左下角
-    ctx.lineTo(x + half_base, y)  # 右下角
-    ctx.lineTo(x, y - height)     # 上頂點
-    ctx.closePath()
-    ctx.fillStyle = color
-    ctx.fill()
-
-# 繪製圓形
-def draw_circle(ctx, x, y, radius, color):
-    """繪製圓形"""
-    ctx.beginPath()
-    ctx.arc(x, y, radius, 0, 2 * math.pi)
-    ctx.fillStyle = color
-    ctx.fill()
-
-# 繪製矩形
-def draw_rectangle(ctx, x, y, width, height, color):
-    """繪製矩形"""
-    ctx.beginPath()
-    ctx.rect(x, y, width, height)
-    ctx.fillStyle = color
-    ctx.fill()
-
-# 標註原點
-def mark_origin(ctx, x, y):
-    """標註原點 (31, 25)"""
-    ctx.fillStyle = "black"
-    ctx.font = "16px Arial"
-    ctx.fillText(f"({x}, {y})", x + 10, y - 10)
-
-# 繪製坐標軸 (從原點 (31, 25) 開始)
-def draw_axes(ctx, origin_x, origin_y):
-    """繪製 X 軸和 Y 軸，並標示正方向"""
-    # X 軸 (向右為正)
-    ctx.beginPath()
-    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(600, origin_y)  # 直到畫布的右側 (X=600)，Y 不變
-    ctx.lineWidth = 2  # 設定線條寬度
-    ctx.strokeStyle = "black"
-    ctx.stroke()
-
-    # Y 軸 (向下為正)
-    ctx.beginPath()
-    ctx.moveTo(origin_x, origin_y)  # 從原點 (31, 25) 開始
-    ctx.lineTo(origin_x, 300)  # 直到畫布的下側 (Y=600)，X 不變
-    ctx.stroke()
-
-    # 標註 X 軸的箭頭 (向右為正)
-    ctx.beginPath()
-    ctx.moveTo(590, origin_y - 10)  # X 軸末端的箭頭起點
-    ctx.lineTo(600, origin_y)
-    ctx.lineTo(590, origin_y + 10)
-    ctx.stroke()
-
-    # 標註 Y 軸的箭頭 (向下為正)
-    ctx.beginPath()
-    ctx.moveTo(origin_x - 10, 290)  # Y 軸末端的箭頭起點
-    ctx.lineTo(origin_x, 300)
-    ctx.lineTo(origin_x + 10, 290)
-    ctx.stroke()
-
-    # 標註 X 軸的文字
-    ctx.fillStyle = "black"
-    ctx.font = "16px Arial"
-    ctx.fillText("X", 570, origin_y + 20)  # 標註 X 軸
-
-    # 標註 Y 軸的文字，移動到箭頭右側
-    ctx.fillText("Y", origin_x + 15, 300 - 30)  # 移動 Y 標註位置
-
-# 繪製場景
-def draw_scene():
-    """繪製場景"""
-    canvas, ctx = initialize_canvas()
-
-    origin_x, origin_y = 31, 25  # 原點坐標 (31, 25)
-
-    # 標註原點 (31, 25)
-    mark_origin(ctx, origin_x, origin_y)
-
-    # 繪製坐標軸 (從原點 (31, 25) 開始)
-    draw_axes(ctx, origin_x, origin_y)
-
-    # 六邊形的大小
-    hexagon_size = 50
-
-    # 計算六邊形的中心點 X 座標，使最左側頂點對齊於 X = 31
-    hexagon_x = 31 + hexagon_size  # 六邊形的中心 X 座標
-
-    # 繪製六邊形
-    draw_hexagon(ctx, hexagon_x, 180, hexagon_size, "orange")
-
-    # 繪製菱形，調整位置
-    diamond_x = 180
-    draw_diamond(ctx, diamond_x, 180, 80, 120, "teal")
-
-    # 繪製縮小的等腰三角形，放置於菱形底部對齊但不重疊，調整位置
-    base = 60  # 三角形底邊長度
-    height = 50  # 根據底邊長度調整高度
-    triangle_x = diamond_x + 60 / 2 + 10
-    draw_isosceles_triangle(ctx, triangle_x, 180 + 60, base, height, "lightpink")
-
-    # 繪製圓形，調整位置
-    circle_x = 280
-    draw_circle(ctx, circle_x, 180, 50, "magenta")
-
-    # 繪製正方形，調整位置
-    square_x = 340
-    draw_rectangle(ctx, square_x, 140, 80, 80, "yellow")
-
-    # 繪製矩形，調整位置
-    rectangle_x = 440
-    draw_rectangle(ctx, rectangle_x, 160, 100, 40, "blue")
-
-# 開始繪製
-draw_scene()</pre>
+<p><img alt="" src="https://youtu.be/8wfMsMqC1tA"/>影片:<a href="https://youtu.be/8wfMsMqC1tA">https://youtu.be/8wfMsMqC1tA</a></p>
+<p><a href="https://gist.githubusercontent.com/41323125/ed043b05a5260caa6411b08ba2c7a28a/raw/4a2f314eb35c8e3a858a8f3913e9e8784fafb00d/w16exam_1">程式</a><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/><img alt="" src="https://youtu.be/8wfMsMqC1tA"/></p>
 <p><br/><br/></p>
 <!-- 導入 brython 程式庫 -->
 <p>
@@ -950,8 +788,7 @@ def draw_scene():
 # 開始繪製
 draw_scene()
 </script>
-</p>
-<h1>HW 3</h1>
+</p><h1>HW 3</h1>
 <h4>主題: 利用 Python 控制機電模擬系統 (20%)</h4>
 <p style="padding-left: 30px;">利用 <a href="https://solvespace.com/">https://solvespace.com/</a> 建立機械系統零組件</p>
 <p style="padding-left: 30px;">利用 <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> 建立機電模擬系統</p>
@@ -962,7 +799,86 @@ draw_scene()
 <p>完成上述流程整理後, 請將 HW4 自評分數輸入 cp2024 自評表單中.</p>
 <h2>HW 3 Exam</h2>
 <h3>w16_exam2</h3>
-<h1>HW 4</h1>
+<p>影片:<a href="https://youtu.be/DDsx6w0UTSo">https://youtu.be/DDsx6w0UTSo</a></p>
+<p><a href="https://gist.githubusercontent.com/41323125/0bdd97764a714982ef4ae0a57d280cf0/raw/d62cc9f78e2730189885d1623963ab1b326b8d73/w16_exam2">程式</a></p>
+<p><a href="https://gist.githubusercontent.com/41323125/0bdd97764a714982ef4ae0a57d280cf0/raw/d62cc9f78e2730189885d1623963ab1b326b8d73/w16_exam2"> <!-- 導入 brython 程式庫 --></a></p>
+<p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+</p>
+<p><a href="https://gist.githubusercontent.com/41323125/0bdd97764a714982ef4ae0a57d280cf0/raw/d62cc9f78e2730189885d1623963ab1b326b8d73/w16_exam2"><!-- 啟動 Brython --></a></p>
+<p>
+<script>
+window.onload = function() { 
+    brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']}); 
+}
+</script>
+</p>
+<p><a href="https://gist.githubusercontent.com/41323125/0bdd97764a714982ef4ae0a57d280cf0/raw/d62cc9f78e2730189885d1623963ab1b326b8d73/w16_exam2"><!-- 定義顯示 canvas 的 div 元素 --></a></p>
+<div id="brython_div1"></div>
+<p>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 初始化畫布
+def initialize_canvas():
+    canvas = html.CANVAS(width=1000, height=1000)  # 調整畫布大小為 1000x1000
+    brython_div = doc["brython_div1"]
+    brython_div <= canvas
+    ctx = canvas.getContext("2d")
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, 1000, 1000)  # 填充整個畫布為白色
+    return canvas, ctx
+ 
+# 繪製迷宮
+def draw_maze(ctx):
+    # 設定線條樣式
+    ctx.lineWidth = 2  # 線條寬度為 2px
+    ctx.strokeStyle = "blue"  # 線條顏色為藍色
+
+    # 定義迷宮線條（根據圖片）
+    lines = [
+        # 外框
+        ((100, 100), (450, 100)),  # 上左邊
+        ((550, 100), (900, 100)),  # 上右
+        ((100, 100), (100, 900)),  # 左邊
+        ((900, 100), (900, 900)),  # 右邊
+        ((100, 900), (450, 900)),  # 左下
+        ((550, 900), (900, 900)),  # 右下
+       
+        # 內部垂直線
+        ((400, 250), (400, 400)),
+        ((750, 250), (750, 400)),
+        ((450, 750), (450, 900)),
+        ((750, 600), (750, 900)),
+        ((300, 600), (300, 750)),
+        ((575, 400), (575, 600)),
+        
+        # 內部水平線
+        ((250, 250), (750, 250)),
+        ((100, 400), (400, 400)),
+        ((450, 750), (600, 750)),
+        ((300, 600), (750, 600)),
+    ]
+
+    # 繪製所有線條
+    for start, end in lines:
+        ctx.beginPath()
+        ctx.moveTo(*start)
+        ctx.lineTo(*end)
+        ctx.stroke()
+
+    # 用紅色標示左上角起始點
+    ctx.fillStyle = "red"
+    ctx.font = "20px Arial"
+    ctx.fillText("(31, 25)", 110, 90)
+
+# 主程式
+canvas, ctx = initialize_canvas()
+draw_maze(ctx)
+</script>
+</p><h1>HW 4</h1>
 <p></p>
 <h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
