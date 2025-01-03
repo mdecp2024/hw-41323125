@@ -141,7 +141,109 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report<br /><h1>w16_exam3</h1><br />HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report</div>
+    <div id="tipue_search_content">HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report<br /><h1>w16_exam3</h1>
+<p>影片:<a href="https://youtu.be/wdx79__NveQ">https://youtu.be/wdx79__NveQ</a></p>
+<p><a href="https://gist.githubusercontent.com/41323125/92d8dea38b7d8adffd0647495e86ff2c/raw/a694617d38e620c5984337de5dd715ea1e65e870/w16_exam3">程式</a></p>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="./../cmsimde/static/brython.js"></script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload = function() { 
+    brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']}); 
+}
+</script>
+</p>
+<!-- 定義顯示 canvas 的 div 元素 -->
+<div id="brython_div1"></div>
+<p>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 初始化畫布
+def initialize_canvas():
+    canvas = html.CANVAS(width=1000, height=1000)  # 調整畫布大小為 1000x1000
+    brython_div = doc["brython_div1"]
+    brython_div <= canvas
+    ctx = canvas.getContext("2d")
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, 1000, 1000)  # 填充整個畫布為白色
+    return canvas, ctx
+ 
+# 繪製迷宮
+def draw_maze(ctx):
+    # 設定線條樣式
+    ctx.lineWidth = 2  # 線條寬度為 2px
+    ctx.strokeStyle = "black"  # 線條顏色為黑色
+
+    # 定義迷宮線條（根據圖片）
+    lines = [
+        # 外框
+        ((100, 100), (450, 100)),  # 上左邊
+        ((550, 100), (900, 100)),  # 上右
+        ((100, 100), (100, 900)),  # 左邊
+        ((900, 100), (900, 900)),  # 右邊
+        ((100, 900), (450, 900)),  # 左下
+        ((550, 900), (900, 900)),  # 右下
+       
+        # 內部垂直線
+        ((400, 250), (400, 400)),
+        ((750, 250), (750, 400)),
+        ((450, 750), (450, 900)),
+        ((750, 600), (750, 900)),
+        ((300, 600), (300, 750)),
+        ((575, 400), (575, 600)),
+        
+        # 內部水平線
+        ((250, 250), (750, 250)),
+        ((100, 400), (400, 400)),
+        ((450, 750), (600, 750)),
+        ((300, 600), (750, 600)),
+    ]
+
+    # 繪製所有線條
+    for start, end in lines:
+        ctx.beginPath()
+        ctx.moveTo(*start)
+        ctx.lineTo(*end)
+        ctx.stroke()
+
+    # 用紅色標示左上角起始點
+    ctx.fillStyle = "red"
+    ctx.font = "20px Arial"
+    ctx.fillText("(31, 25)", 110, 90)
+
+    # 增加紅色線，繞過迷宮
+    ctx.strokeStyle = "red"  # 紅色線
+    ctx.lineWidth = 3  # 線條寬度調高一點
+    ctx.beginPath()
+    ctx.moveTo(500, 50)  # 紅色線起始點
+    ctx.lineTo(500, 175)  # 向下移動到第一個拐點
+    ctx.lineTo(825, 175)  # 向右移動
+    ctx.lineTo(825, 500)  # 向下移動
+    ctx.lineTo(675, 500)  # 向右移動
+    ctx.lineTo(675, 325)  # 向下移動
+    ctx.lineTo(500, 325)  # 向右移動到出口前
+    ctx.lineTo(500, 500)  # 向下到出口
+    ctx.lineTo(200, 500)
+    ctx.lineTo(200, 825)
+    ctx.lineTo(375, 825)
+    ctx.lineTo(375, 675)
+    ctx.lineTo(675, 675)
+    ctx.lineTo(675, 825)
+    ctx.lineTo(500, 825)
+    ctx.lineTo(500, 950)
+    ctx.stroke()
+
+# 主程序
+canvas, ctx = initialize_canvas()
+draw_maze(ctx)
+</script>
+</p><br />HW 4 Exam << <a href='HW 4 Exam.html'>Previous</a> <a href='Final Report.html'>Next</a> >> Final Report</div>
         
     <!-- footer -->
       <div class="container">
